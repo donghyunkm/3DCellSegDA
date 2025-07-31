@@ -1,3 +1,6 @@
+# Syle transfer for 3D images. Use within directory in which Latent Diffusion Model (LDM - CompVis) is installed.
+# Code is based on "Style Injection in Diffusion: A Training-free Approach for Adapting Large-scale Diffusion Models for Style Transfer" 
+# https://arxiv.org/abs/2312.09008
 import argparse, os
 import torch
 import numpy as np
