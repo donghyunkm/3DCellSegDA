@@ -170,7 +170,7 @@ div.csl-indent {
 
 <p>Instance segmentation of 3D cell microscopy data is crucial for studying embryonic development. Various deep learning models have been developed for this task, such as Cellpose <span class="citation" data-cites="stringer2021cellpose">(<a href="#ref-stringer2021cellpose" role="doc-biblioref">Stringer et al. 2021</a>)</span> and EmbedSeg <span class="citation" data-cites="lalit2022embedseg">(<a href="#ref-lalit2022embedseg" role="doc-biblioref">Lalit, Tomancak, and Jug 2022</a>)</span>.</p>
 <p>However, these models are only as good as the data they are trained on, and ground-truth annotations are difficult to obtain. One solution is to train models on existing ground truths from other datasets and experiments. However, differences in experimental protocols cause images obtained in separate environments to exhibit varying data distributions. A model trained on these differing source distributions may encounter difficulties generalizing to target distributions.</p>
-<p>We explore various domain adaptation methods to solve this issue.</p>
+<p>We explore various domain adaptation methods to solve this issue, including transfer learning, adversarial domain adaptation, and 3D style transfer. We find that 3D style transfer may be the optimal choice for 3D cell segmentation.</p>
 <section id="background-on-3d-cell-segmentation" class="level3">
 <h3 class="anchored" data-anchor-id="background-on-3d-cell-segmentation">Background on 3D Cell Segmentation</h3>
 <p>3D cell segmentations identify and delineate individual cells (in other words, it is instance segmentation) within 3 dimensional microscopy data. Biologists use segmentations to quantitatively analyze cell shapes, cell morphology, and spatial relationships. 3D cell segmentations are crucial for studying embryonic development as they can help reveal the mutual effects of cellular structure (organization) and cell fate differentiation <span class="citation" data-cites="chalifoux2025geometric">(<a href="#ref-chalifoux2025geometric" role="doc-biblioref">Chalifoux, Avdeeva, and Posfai 2025</a>)</span>.</p>
@@ -215,7 +215,7 @@ Predicted test annotations where Train Distribution ≠ Test Distribution
 </tr>
 </tbody></table>
 <p><br></p>
-<p>We train a 3D segmentation model on the above train distribution and evaluate it on 2 test distributions: 1 test distribution that is equivalent to the train distribution and 1 test distribution that is different to the train distribution. We observe that if the test and train distributions are equal, we obtain good predicted segmentations. However, if the test and train distributions are not equal, the predicted segmentations are poor.</p>
+<p>We train a 3D segmentation model on the above train distribution and evaluate it on 2 test distributions: 1 test distribution that is equivalent to the train distribution and 1 test distribution that is different to the train distribution. We observe that if the test and train distributions are equal, we obtain good predicted segmentations. However, if the test and train distributions are not equal, the predicted segmentations are poor. This reflects prior findings on how deep learning methods often make erroneous predictions when tested on datasets with different distributions than that of the training dataset <span class="citation" data-cites="kim2024investigation">(<a href="#ref-kim2024investigation" role="doc-biblioref">Kim, Kim, and Hyun 2024</a>)</span>.</p>
 </section>
 <section id="embedseg" class="level3">
 <h3 class="anchored" data-anchor-id="embedseg">EmbedSeg</h3>
@@ -511,6 +511,9 @@ Ganin, Yaroslav, Evgeniya Ustinova, Hana Ajakan, Pascal Germain, Hugo Larochelle
 </div>
 <div id="ref-jing2019neural" class="csl-entry" role="listitem">
 Jing, Yongcheng, Yezhou Yang, Zunlei Feng, Jingwen Ye, Yizhou Yu, and Mingli Song. 2019. <span>“Neural Style Transfer: A Review.”</span> <em>IEEE Transactions on Visualization and Computer Graphics</em> 26 (11): 3365–85.
+</div>
+<div id="ref-kim2024investigation" class="csl-entry" role="listitem">
+Kim, Byung Chun, Byungro Kim, and Yoonsuk Hyun. 2024. <span>“Investigation of Out-of-Distribution Detection Across Various Models and Training Methodologies.”</span> <em>Neural Networks</em> 175: 106288.
 </div>
 <div id="ref-lalit2022embedseg" class="csl-entry" role="listitem">
 Lalit, Manan, Pavel Tomancak, and Florian Jug. 2022. <span>“Embedseg: Embedding-Based Instance Segmentation for Biomedical Microscopy Data.”</span> <em>Medical Image Analysis</em> 81: 102523.
