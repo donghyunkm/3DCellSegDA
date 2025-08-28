@@ -173,7 +173,7 @@ div.csl-indent {
 <p>We explore various domain adaptation methods to solve this issue.</p>
 <section id="background-on-3d-cell-segmentation" class="level3">
 <h3 class="anchored" data-anchor-id="background-on-3d-cell-segmentation">Background on 3D Cell Segmentation</h3>
-<p>3D cell segmentations identify and delienate individual cells (in other words, it is instance segmentation) within 3 dimensional microscopy data. Biologists use segmentations to quantiatively analyze cell shapes, cell morphology, and spatial relationships. 3D cell segmentations are very important for studying embryonic development as they can help reveal the mutal effects of cellular structure (organization) and cell fate differentiation <span class="citation" data-cites="chalifoux2025geometric">(<a href="#ref-chalifoux2025geometric" role="doc-biblioref">Chalifoux, Avdeeva, and Posfai 2025</a>)</span>.</p>
+<p>3D cell segmentations identify and delienate individual cells (in other words, it is instance segmentation) within 3 dimensional microscopy data. Biologists use segmentations to quantitatively analyze cell shapes, cell morphology, and spatial relationships. 3D cell segmentations are crucial for studying embryonic development as they can help reveal the mutal effects of cellular structure (organization) and cell fate differentiation <span class="citation" data-cites="chalifoux2025geometric">(<a href="#ref-chalifoux2025geometric" role="doc-biblioref">Chalifoux, Avdeeva, and Posfai 2025</a>)</span>.</p>
 </section>
 <section id="problem-overview" class="level3">
 <h3 class="anchored" data-anchor-id="problem-overview">Problem Overview</h3>
@@ -199,18 +199,18 @@ Volumes from a Train Distribution
 <table>
 <tbody><tr>
 <td align="center">
-Predicted test annotations where Train Distribution ≠ Test Distribution
+Predicted test annotations where Train Distribution = Test Distribution
 </td>
 <td align="center">
-Predicted test annotations where Train Distribution = Test Distribution
+Predicted test annotations where Train Distribution ≠ Test Distribution
 </td>
 </tr>
 <tr>
 <td valign="top">
-<img src="traintestdiff.png" width="400">
+<img src="traintestsame.png" width="400">
 </td>
 <td valign="top">
-<img src="traintestsame.png" width="400">
+<img src="traintestdiff.png" width="400">
 </td>
 </tr>
 </tbody></table>
@@ -276,10 +276,10 @@ Predicted Test annotations
 </tr>
 <tr>
 <td valign="top">
-<img src="TL-baseline.png" width="400">
+<img src="baseline1.png" width="400">
 </td>
 <td valign="top">
-<img src="TL-finetune.png" width="400">
+<img src="finetuned.png" width="400">
 </td>
 </tr>
 </tbody></table>
@@ -331,7 +331,7 @@ Predicted Test annotations
 </tr>
 <tr>
 <td valign="top">
-<img src="TL-baseline.png" width="400">
+<img src="baseline2.png" width="400">
 </td>
 <td valign="top">
 <img src="domainadapted.png" width="400">
