@@ -173,7 +173,7 @@ div.csl-indent {
 <p>We explore various domain adaptation methods to solve this issue.</p>
 <section id="background-on-3d-cell-segmentation" class="level3">
 <h3 class="anchored" data-anchor-id="background-on-3d-cell-segmentation">Background on 3D Cell Segmentation</h3>
-<p>3D cell segmentations identify and delienate individual cells (in other words, it is instance segmentation) within 3 dimensional microscopy data. Biologists use segmentations to quantitatively analyze cell shapes, cell morphology, and spatial relationships. 3D cell segmentations are crucial for studying embryonic development as they can help reveal the mutal effects of cellular structure (organization) and cell fate differentiation <span class="citation" data-cites="chalifoux2025geometric">(<a href="#ref-chalifoux2025geometric" role="doc-biblioref">Chalifoux, Avdeeva, and Posfai 2025</a>)</span>.</p>
+<p>3D cell segmentations identify and delineate individual cells (in other words, it is instance segmentation) within 3 dimensional microscopy data. Biologists use segmentations to quantitatively analyze cell shapes, cell morphology, and spatial relationships. 3D cell segmentations are crucial for studying embryonic development as they can help reveal the mutual effects of cellular structure (organization) and cell fate differentiation <span class="citation" data-cites="chalifoux2025geometric">(<a href="#ref-chalifoux2025geometric" role="doc-biblioref">Chalifoux, Avdeeva, and Posfai 2025</a>)</span>.</p>
 </section>
 <section id="problem-overview" class="level3">
 <h3 class="anchored" data-anchor-id="problem-overview">Problem Overview</h3>
@@ -181,7 +181,7 @@ div.csl-indent {
 <table>
 <tbody><tr>
 <td colspan="2" align="center">
-Volumes from a Train Distribution
+2 different volumes from a Train Distribution. Note, for all 3D volumes, we show a x-y, y-z, and x-z slice, obtained by slicing the corresponding center.
 </td>
 </tr>
 <tr>
@@ -226,7 +226,7 @@ Predicted test annotations where Train Distribution ≠ Test Distribution
 Encoder portion of network used in EmbedSeg <span class="citation" data-cites="lalit2022embedseg">(<a href="#ref-lalit2022embedseg" role="doc-biblioref">Lalit, Tomancak, and Jug 2022</a>)</span>
 </figcaption>
 </figure>
-<p>In EmbedSeg, each voxel predicts a spatial emededding (a unique voxel location that represents an object this voxel belongs to). Each segmentation mask consists of all voxels whose embeddings belong to the same cluster of embeddings. The model predicts clustering bandwidths in x, y, z dimensions and a seediness score (which indicates the likelihood a voxel represents an object instance) to help cluster voxels.</p>
+<p>In EmbedSeg, each voxel predicts a spatial embedding (a unique voxel location that represents an object this voxel belongs to). Each segmentation mask consists of all voxels whose embeddings belong to the same cluster of embeddings. The model predicts clustering bandwidths in x, y, z dimensions and a seediness score (which indicates the likelihood a voxel represents an object instance) to help cluster voxels.</p>
 </section>
 <section id="datasets" class="level3">
 <h3 class="anchored" data-anchor-id="datasets">Datasets</h3>
@@ -245,8 +245,8 @@ Encoder portion of network used in EmbedSeg <span class="citation" data-cites="l
 <section id="transfer-learning" class="level3">
 <h3 class="anchored" data-anchor-id="transfer-learning">Transfer Learning</h3>
 <p>The first domain adaptation method we consider is transfer learning.</p>
-<p>Transfer learning is a machine learning technique in which the knowledge a model gains from 1 dataset (or task) is used to improve performance on a related dataset (or task). Transfer learning is particularly useful when the target data does not contain a sufficient number of samples <span class="citation" data-cites="zhuang2020comprehensive">(<a href="#ref-zhuang2020comprehensive" role="doc-biblioref">Zhuang et al. 2020</a>)</span>.</p>
-<p>To create our fine-tuned model, we first train an EmbedSeg model on the source data (mouse embryo A) for 200 epochs. We then fine tune the model on the target data for another 200 epochs. We decay the learning rate by linearly changing a small multiplicative factor throughout the 400 epochs. All layers are allowed to train during fine tuning. To create our baseline model, we train an EmbedSeg model on the source data for 400 epochs.</p>
+<p>Transfer learning is a machine learning technique in which the knowledge a model gains from 1 dataset (or task) is used to improve performance on a related dataset (or task). Transfer learning is particularly useful when the target data does not contain a sufficient number of labelled samples <span class="citation" data-cites="zhuang2020comprehensive">(<a href="#ref-zhuang2020comprehensive" role="doc-biblioref">Zhuang et al. 2020</a>)</span>.</p>
+<p>To create our baseline model, we train an EmbedSeg model on the source data for 400 epochs. To create our fine-tuned model, we first train an EmbedSeg model on the source data (mouse embryo A) for 200 epochs. We then fine tune the model on the target data for another 200 epochs. We decay the learning rate by linearly changing a small multiplicative factor throughout the 400 epochs. All layers are allowed to train during fine tuning.</p>
 <table>
 <tbody><tr>
 <td align="center" style="font-size: 20px; font-weight: bold;">
@@ -288,14 +288,14 @@ Predicted Test annotations
 </section>
 <section id="adversarial-domain-adaptation" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="adversarial-domain-adaptation">Adversarial Domain Adaptation</h3>
-<p>A common approach to domain adaptation is to learn a neural transformation that maps different domains to a common feature space. Adversarial domain adaptation methods do so by using adversarial learning to minimize the difference between features extracted from source and target domains, allowing a model trained on the source domain to generalize better to the target domain. Specifically, a domain discriminator network tries to distingish features from the source domain and features from the target domain, and a feature extractor network tries to generate features that confuse the discriminator network. If trained properly, this adversarial learning objective results in domain invariant features <span class="citation" data-cites="ganin2016domain">(<a href="#ref-ganin2016domain" role="doc-biblioref">Ganin et al. 2016</a>)</span>.</p>
+<p>A common approach to domain adaptation is to learn a neural transformation that maps different domains to a common feature space. Adversarial domain adaptation methods do so by using adversarial learning to minimize the difference between features extracted from source and target domains, allowing a model trained on the source domain to generalize better to the target domain. Specifically, a domain discriminator network tries to distinguish features from the source domain and features from the target domain, and a feature extractor network tries to generate features that confuse the discriminator network. If trained properly, this adversarial learning objective results in domain invariant features <span class="citation" data-cites="ganin2016domain">(<a href="#ref-ganin2016domain" role="doc-biblioref">Ganin et al. 2016</a>)</span>.</p>
 <figure align="center" class="figure">
 <img src="adda.png" width="800" class="figure-img">
 <figcaption>
 Overview of Adversarial Discriminative Domain Adaptation <span class="citation" data-cites="tzeng2017adversarial">(<a href="#ref-tzeng2017adversarial" role="doc-biblioref">Tzeng et al. 2017</a>)</span>
 </figcaption>
 </figure>
-<p>Our framework for adversarial domain adaptation is based on Adversarial Discriminative Domain Adaptation <span class="citation" data-cites="tzeng2017adversarial">(<a href="#ref-tzeng2017adversarial" role="doc-biblioref">Tzeng et al. 2017</a>)</span>. As shown in the above figure, a source encoder is first pre-trained on the source domain. Next, a target encoder is trained such that a discriminator network cannot distinguish between features from the source encode and target encoder. During evaluation, input from the target domain is mapped to the common feature space and the source classifier classifies the mapped features.</p>
+<p>Our framework for adversarial domain adaptation is based on Adversarial Discriminative Domain Adaptation <span class="citation" data-cites="tzeng2017adversarial">(<a href="#ref-tzeng2017adversarial" role="doc-biblioref">Tzeng et al. 2017</a>)</span>. As shown in the above figure, a source encoder is first pre-trained on the source domain. Next, a target encoder is trained such that a discriminator network cannot distinguish between features from the source encoder and target encoder. During evaluation, input from the target domain is mapped to the common feature space and the source classifier classifies the mapped features.</p>
 <p>For adversarial domain adaptation in the context of 3D cell segmentation, we make some changes. We use 1 encoder for both the source and target domains as most domain adaptation methods seem to use a shared encoder for source and target domains–doing so did not have a meaningful difference in practice.</p>
 <p>In the training loop, EmbedSeg’s encoder and decoder are first trained with source data. Next, a discriminator network is trained to distinguish between features extracted from the source domain and features extracted from the target domain. Finally, EmbedSeg’s encoder (the feature extractor) is trained with backward propagation from the discriminator’s error function: the discriminator is fed “fake” labels for target features. This final step is crucial as it motivates the encoder to generate domain invariant features.</p>
 
@@ -339,12 +339,12 @@ Predicted Test annotations
 </tr>
 </tbody></table>
 <p><br></p>
-<p>We see that a domain adapted model outperforms a baseline model just trained on source data. Unfortunately, domain adaptation did not yield good results compared to transfer learning. We hypothesize that this may be because fine-tuing the encoder to generate domain invariant features might cause the extracted features to deviate from those optimal for the original cell segmentation task.</p>
-<p>The final domain adaptation method we consider not only does not require any ground truth segmentations for the target dataset, but also has the advantage of increasing the number of useful training samples.</p>
+<p>We see that a domain adapted model outperforms a baseline model just trained on source data. Unfortunately, domain adaptation did not yield good results compared to transfer learning. We hypothesize that this may be because fine-tuning the encoder to generate domain invariant features might cause the extracted features to deviate from those optimal for the original cell segmentation task.</p>
+<p>The final domain adaptation method we consider not only does not require any ground truth segmentations for the target dataset, but also has the advantage of increasing the number of useful training samples (useful in that the training samples all follow the same data distribution).</p>
 </section>
 <section id="style-transfer" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="style-transfer">Style Transfer</h3>
-<p>Style transfer fuses the content of one image with the style (e.g., colors, textures, and noise) of another. By transferring the same style to the source domain and target domain, a model trained on the source data can generalize to the target data without needing ground truth for the target data <span class="citation" data-cites="jing2019neural">(<a href="#ref-jing2019neural" role="doc-biblioref">Jing et al. 2019</a>)</span>. Style transfer could help increase the number of useful training samples for a target dataset (thus leading to better generalization) as multiple different datasets can all be transferred to the same target style.</p>
+<p>Style transfer fuses the content of one image with the style (e.g., colors, textures, and noise) of another. By transferring the same style to the source domain and target domain, a model trained on the source data can generalize to the target data without needing ground truth for the target data, i.e.&nbsp;zero shot segmentation <span class="citation" data-cites="jing2019neural">(<a href="#ref-jing2019neural" role="doc-biblioref">Jing et al. 2019</a>)</span>. Style transfer could help increase the number of useful training samples for a target dataset (thus leading to better generalization) as multiple different datasets can all be transferred to the same target style.</p>
 <p>Inspired by work on zero-shot segmentation in CellStyle <span class="citation" data-cites="yilmaz2025cellstyle">(<a href="#ref-yilmaz2025cellstyle" role="doc-biblioref">Yilmaz et al. 2025</a>)</span>, we adapt a style transfer method based on a large pre-trained latent diffusion model, StyleID <span class="citation" data-cites="chung2024style">(<a href="#ref-chung2024style" role="doc-biblioref">Chung, Hyun, and Heo 2024</a>)</span>. The advantage of this method is that it does not require inference-stage optimization.</p>
 <figure align="center" class="figure">
 <img src="styleid.png" width="600" class="figure-img">
@@ -366,7 +366,7 @@ Architecture of a latent diffusion model <span class="citation" data-cites="romb
 Style transfer for 3D volumes
 </figcaption>
 </figure>
-<p>Because there are no publicly available 3D large-scale pre-trained diffusion models, we adapt this 2D method to 3D. As shown in the figure above, we transfer each slice of the 3D cell microscopy volume independently before concatenating them to obtain the style-transferred 3D volume. Note, we style transfer both source and target data to a common style. We found that doing so works better in practice (compared to just transferring either the source or target).</p>
+<p>Because there are no publicly available 3D large-scale pre-trained diffusion models, we adapt this 2D method to 3D. As shown in the figure above, we transfer each slice of the 3D cell microscopy volume independently before concatenating them to obtain the style-transferred 3D volume. Note, we transfer both source and target data to a common style. We found that doing so works better in practice (compared to just transferring either the source or target).</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>3D style transfer code can be found <a href="https://github.com/donghyunkm/3DCellSegDA/blob/main/cellSegDA/3d_style_transfer.py">here</a>.</p>
@@ -374,7 +374,7 @@ Style transfer for 3D volumes
 <table>
 <tbody><tr>
 <td colspan="3" align="center">
-Style to transfer (Mouse embryo A from Hiiragi group)
+Style to transfer (Mouse embryo A from Hiiragi group). 3 volumes are shown to illustrate the different stages of cell development.
 </td>
 </tr>
 <tr>
@@ -483,7 +483,7 @@ Predicted segmentations from model trained using 2 style transferred source data
 </section>
 <section id="conclusion-and-future-work" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion-and-future-work">Conclusion and Future Work</h3>
-<p>We explored 3 different domain adpation methods for 3D cell segmentation. We find that all 3 methods have benefits for specific situations. Transfer learning will lead to the best performance when ground truth segmentations for the target dataset are available. On the other hand, domain adaptation and style transfer will lead to the best performance when ground truth segmentations are unavailable.</p>
+<p>We explored 3 different domain adaptation methods for 3D cell segmentation. We find that all 3 methods have benefits for specific situations. Transfer learning will lead to the best performance when ground truth segmentations for the target dataset are available. On the other hand, domain adaptation and style transfer will lead to the best performance when ground truth segmentations are unavailable.</p>
 <p>We believe that style transfer may be the optimal choice for 3D cell segmentation as style transfer could be used to increase the number of useful training samples. We hope to pursue future work in this idea. Future work could also include using style transfer to build large, pre-trained 3D segmentation models that can be immediately applied to newly imaged cells.</p>
 <p>One limitation of our work is that our predicted segmentations are not good enough to be used by biologists without additional corrections. However, we believe this to be the result of the training data quality.</p>
 <p><br>
@@ -492,7 +492,7 @@ Predicted segmentations from model trained using 2 style transferred source data
 <p>Code repository: <a href="https://github.com/donghyunkm/3DCellSegDA" class="uri">https://github.com/donghyunkm/3DCellSegDA</a></p>
 <p><br>
 </p>
-<p>We thank the Hiiragi Grouip for providing mouse embryo data and annotations. We also thank Alf Honigmann and Anna Goncharova for the Mouse-Organoid-Cells-CBG data and annotations.</p>
+<p>We thank the Hiiragi Group for providing mouse embryo data and annotations. We also thank Alf Honigmann and Anna Goncharova for the Mouse-Organoid-Cells-CBG data and annotations.</p>
 <p>We thank Hayden Nunley, David Denberg, Lisa Brown, and Andrew Lu for helpful feedback and discussions.</p>
 
 
